@@ -104,11 +104,11 @@ included in the project:
 
    ```bash
    # Clone your fork of the repo into the current directory
-   git clone https://github.com/danielscherzer/WpfOpenGlControl.git
+   git clone https://github.com/danielscherzer/WpfOpenGl.git
    # Navigate to the newly cloned directory
    cd <folder-name>
    # Assign the original repo to a remote called "upstream"
-   git remote add upstream https://github.com/danielscherzer/WpfOpenGlControl.git
+   git remote add upstream https://github.com/danielscherzer/WpfOpenGl.git
    ```
 
 2. If you cloned a while ago, get the latest changes from upstream:

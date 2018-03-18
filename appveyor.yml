@@ -1,4 +1,4 @@
-version: 0.2.{build}
+version: 0.3.{build}
 
 # enable patching of AssemblyInfo.* files with APPVEYOR version
 assembly_info:
