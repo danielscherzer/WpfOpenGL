@@ -1,0 +1,31 @@
+version: 0.2.{build}
+
+# enable patching of AssemblyInfo.* files with appveyor version
+assembly_info:
+  patch: true
+  file: AssemblyInfo.*
+  assembly_version: "{version}"
+  assembly_file_version: "{version}"
+  assembly_informational_version: "{version}"
+
+image: Visual Studio 2017
+
+configuration:
+#- Debug
+- Release
+
+before_build:
+- nuget restore -Verbosity quiet
+
+build:
+  publish_nuget: true             # package projects with .nuspec files and push to artifacts
+  publish_nuget_symbols: true     # generate and publish NuGet symbol packages
+  include_nuget_references: true  # add -IncludeReferencedProjects option while packaging NuGet artifacts
+  verbosity: minimal              # MSBuild verbosity level
+
+deploy:
+  provider: NuGet
+  api_key:
+    secure: w5QCSXAxezmCE9sCYev5jEuL4uAicWaB5UrXtZkSMRfHVHr1nWyJnPaJO6r+rG5j
+  skip_symbols: false
+  artifact: /.*\.nupkg/

@@ -1,0 +1,28 @@
+﻿<Window x:Class="Example.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:WpfOpenGL="clr-namespace:WpfGlslControl;assembly=WpfGlslControl" 
+        Title="MainWindow" Height="500" Width="700" SnapsToDevicePixels="True">
+	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="8*" />
+			<ColumnDefinition Width="2*" />
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*" />
+			<RowDefinition Height="*" />
+		</Grid.RowDefinitions>
+		<WpfOpenGL:WpfShaderControl Grid.Column="0" Grid.Row="0" x:Name="shaderControl"/>
+		<WpfOpenGL:WpfShaderControl Grid.Column="0" Grid.Row="1" x:Name="shaderControl2"/>
+		<StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal">
+			<TextBlock Text="{Binding Path=ActualWidth, ElementName=shaderControl, StringFormat={}{0:#}}"/>
+			<TextBlock Text="x"/>
+			<TextBlock Text="{Binding Path=ActualHeight, ElementName=shaderControl, StringFormat={}{0:#}}"/>
+			<TextBlock Text=" pixel"/>
+		</StackPanel>
+		<StackPanel Grid.Column="1" Grid.Row="1" Orientation="Vertical">
+			<TextBox TextWrapping="Wrap" 
+					 Text="{Binding Path=ShaderLog, ElementName=shaderControl2, Mode=OneWay}"/>
+		</StackPanel>
+	</Grid>
+</Window>
