@@ -4,28 +4,27 @@
 		xmlns:WpfOpenGL="clr-namespace:WpfOpenGlControl;assembly=WpfOpenGlControl" 
         Title="MainWindow" Height="350" Width="525" SnapsToDevicePixels="True">
 	<Grid>
-		<Grid.RowDefinitions>
-			<RowDefinition Height="*" />
-			<RowDefinition Height="*" />
-		</Grid.RowDefinitions>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="*" />
 			<ColumnDefinition Width="5" />
 			<ColumnDefinition Width="*" />
 		</Grid.ColumnDefinitions>
-		<Border Grid.Row="0" Grid.Column="0" BorderBrush="Black" BorderThickness="5">
-			<WpfOpenGL:WpfOpenGLControl x:Name="glControl"/>
-		</Border>
-		<Border Grid.Row="1" Grid.Column="0" BorderBrush="Black" BorderThickness="5">
-			<WpfOpenGL:WpfOpenGLControl x:Name="glControl2"/>
-		</Border>
-		<GridSplitter Grid.Row="0" Grid.Column="1" Width="5" HorizontalAlignment="Stretch" />
-		<GridSplitter Grid.Row="1" Grid.Column="1" Width="5" HorizontalAlignment="Stretch" />
-		<Border Grid.Row="0" Grid.Column="2" BorderBrush="Black" BorderThickness="5">
-			<WpfOpenGL:WpfOpenGLControl x:Name="glControl1"/>
-		</Border>
-		<Border Grid.Row="1" Grid.Column="2" BorderBrush="Black" BorderThickness="5">
-			<WpfOpenGL:WpfOpenGLControl x:Name="glControl3"/>
-		</Border>
+		<Grid Grid.Column="0">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="*" />
+				<RowDefinition Height="*" />
+			</Grid.RowDefinitions>
+			<Border Grid.Row="0" BorderBrush="Black" BorderThickness="5">
+				<WpfOpenGL:WpfOpenGLControl x:Name="glControl" IsRenderLoopActivated="{Binding Path=IsChecked, ElementName=activated, Mode=TwoWay}"/>
+			</Border>
+			<Border Grid.Row="1" BorderBrush="Black" BorderThickness="5">
+				<WpfOpenGL:WpfOpenGLControl x:Name="glControl1" IsRenderLoopActivated="{Binding Path=IsChecked, ElementName=activated1, Mode=TwoWay}"/>
+			</Border>
+		</Grid>
+		<GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch" />
+		<StackPanel Grid.Column="2" >
+			<CheckBox x:Name="activated" IsChecked="True">activate render loop 0</CheckBox>
+			<CheckBox x:Name="activated1" IsChecked="True">activate render loop 1</CheckBox>
+		</StackPanel>
 	</Grid>
 </Window>
