@@ -77,8 +77,5 @@
       <Version>3.0.0-pre</Version>
     </PackageReference>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="app.config" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
