@@ -1,6 +1,7 @@
 ﻿using OpenTK.Graphics.OpenGL;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
@@ -59,7 +60,7 @@ namespace WpfGlslControl
 		public WpfShaderControl()
 		{
 			InitializeComponent();
-			contentManager = ContentManagerGL.Create(Assembly.GetExecutingAssembly());
+			contentManager = ContentManagerGL.Create(Assembly.GetExecutingAssembly(), false);
 		}
 
 		/// <summary>
@@ -163,6 +164,7 @@ namespace WpfGlslControl
 				DependencyPropertyChangedEventArgs e)
 		{
 			var control = source as WpfShaderControl;
+			if (control is null) return;
 			control.needShaderReload = true;
 			control.glcontrol.Invalidate();
 		}

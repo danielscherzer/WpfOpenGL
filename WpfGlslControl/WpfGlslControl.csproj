@@ -30,6 +30,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\WpfGlslControl.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -49,17 +50,17 @@
     <Reference Include="System" />
     <Reference Include="System.Xaml" />
     <Reference Include="WindowsBase" />
-    <Reference Include="Zenseless.Base, Version=0.5.32.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Zenseless.Base.0.5.32\lib\net46\Zenseless.Base.dll</HintPath>
+    <Reference Include="Zenseless.Base, Version=0.5.50.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Zenseless.Base.0.5.50\lib\net46\Zenseless.Base.dll</HintPath>
     </Reference>
-    <Reference Include="Zenseless.Geometry, Version=0.5.32.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Zenseless.Geometry.0.5.32\lib\net46\Zenseless.Geometry.dll</HintPath>
+    <Reference Include="Zenseless.Geometry, Version=0.5.50.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Zenseless.Geometry.0.5.50\lib\net46\Zenseless.Geometry.dll</HintPath>
     </Reference>
-    <Reference Include="Zenseless.HLGL, Version=0.5.32.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Zenseless.HLGL.0.5.32\lib\net46\Zenseless.HLGL.dll</HintPath>
+    <Reference Include="Zenseless.HLGL, Version=0.5.50.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Zenseless.HLGL.0.5.50\lib\net46\Zenseless.HLGL.dll</HintPath>
     </Reference>
-    <Reference Include="Zenseless.OpenGL, Version=0.5.32.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Zenseless.OpenGL.0.5.32\lib\net46\Zenseless.OpenGL.dll</HintPath>
+    <Reference Include="Zenseless.OpenGL, Version=0.5.50.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Zenseless.OpenGL.0.5.50\lib\net46\Zenseless.OpenGL.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

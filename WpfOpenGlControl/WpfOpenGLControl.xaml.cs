@@ -1,17 +1,17 @@
-﻿using OpenTK;
-using OpenTK.Graphics;
-using OpenTK.Graphics.OpenGL;
-using System;
-using System.ComponentModel;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Forms.Integration;
-using System.Windows.Media;
-
-namespace WpfOpenGlControl
+﻿namespace WpfOpenGlControl
 {
+	using OpenTK;
+	using OpenTK.Graphics;
+	using OpenTK.Graphics.OpenGL;
+	using System;
+	using System.ComponentModel;
+	using System.Windows;
+	using System.Windows.Controls;
+	using System.Windows.Forms.Integration;
+	using System.Windows.Media;
+
 	/// <summary>
-	/// A WPF GL control. The render context is shared between the instances. It uses a OpenTk.GLControl internally
+	/// A WPF GL control. The render context is by default shared between the instances. It uses a OpenTk.GLControl internally
 	/// </summary>
 	public partial class WpfOpenGLControl : UserControl
 	{
@@ -58,12 +58,30 @@ namespace WpfOpenGlControl
 			, new PropertyMetadata(false, OnRenderLoopActivatedPropertyChanged));
 
 		/// <summary>
+		/// Gets or sets a value indicating whether this instance has a shared rendering context.
+		/// </summary>
+		/// <value>
+		///   <c>true</c> if this instance has shared context; otherwise, <c>false</c>.
+		/// </value>
+		public bool HasSharedContext
+		{
+			get { return (bool)GetValue(HasSharedContextProperty); }
+			set { SetValue(HasSharedContextProperty, value); }
+		}
+
+		/// <summary>
+		/// The has a shared context property
+		/// </summary>
+		public static readonly DependencyProperty HasSharedContextProperty =
+			DependencyProperty.Register(nameof(HasSharedContext), typeof(bool), typeof(WpfOpenGLControl), new PropertyMetadata(false));
+
+		/// <summary>
 		/// Gets a value indicating whether the OpenGL context is valid.
 		/// </summary>
 		/// <value>
 		///   <c>true</c> if the OpenGL context is valid; otherwise, <c>false</c>.
 		/// </value>
-		public bool ValidOpenGLContext => !(s_context is null);
+		public bool ValidOpenGLContext => !(Context is null);
 
 		/// <summary>
 		/// Forces a redraw of this instance.
@@ -74,21 +92,29 @@ namespace WpfOpenGlControl
 		}
 
 		private readonly GLControl glControl;
-		private static IGraphicsContext s_context;
+		private static IGraphicsContext singleContext;
+
+		private IGraphicsContext Context
+		{
+			get
+			{
+				return HasSharedContext ? singleContext : glControl?.Context;
+			}
+		}
 
 		private void GlControl_HandleCreated(object sender, EventArgs e)
 		{
 			if (glControl is null) return;
-			if (s_context is null) //first GLCONTROL sets rendering context
+			if (singleContext is null) //first GLCONTROL sets rendering context
 			{
-				s_context = glControl.Context;
+				singleContext = glControl.Context;
 			}
 		}
 
 		private void GlControl_Paint(object sender, System.Windows.Forms.PaintEventArgs e)
 		{
 			if (glControl is null) return;
-			s_context.MakeCurrent(glControl.WindowInfo);
+			Context.MakeCurrent(glControl.WindowInfo);
 			GL.Viewport(0, 0, glControl.Width, glControl.Height);
 			GlRender?.Invoke(this, e);
 			glControl.SwapBuffers();

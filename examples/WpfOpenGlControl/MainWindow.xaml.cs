@@ -12,8 +12,6 @@ namespace Example
 		public MainWindow()
 		{
 			InitializeComponent();
-			glControl.GlRender += (s, e) => Draw(1f, 0f, 0f);
-			glControl1.GlRender += (s, e) => Draw(0f, 1f, 0f);
 			time.Start();
 		}
 
@@ -33,5 +31,9 @@ namespace Example
 			GL.Vertex2(.9, .9);
 			GL.End();
 		}
+
+		private void GlRenderRed(object sender, System.EventArgs e) => Draw(1f, 0f, 0f);
+
+		private void GlRenderGreen(object sender, System.EventArgs e) => Draw(0f, 1f, 0f);
 	}
 }
