@@ -12,10 +12,5 @@
 		<releaseNotes></releaseNotes>
 		<copyright>$copyright$</copyright>
 		<tags>computer-graphics real-time .net OpenGL glsl shader</tags>
-		<dependencies>
-			<dependency id="OpenTK" version="[3.0.0-pre, )" />
-			<dependency id="OpenTK.GLControl" version="[3.0.0-pre, )" />
-			<dependency id="WpfOpenGlControl" version="[0.2.48,)"/>
-		</dependencies>
 	</metadata>
 </package>
