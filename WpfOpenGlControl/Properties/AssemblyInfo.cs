@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("WpfOpenGlControl")]
-[assembly: AssemblyDescription("A WPF UserControl that hosts a OpenTK control.Multiple WpfOpenGlControls will share a single rendering context to allow sharing of textures, shaders...An example WPF application is available at (https://github.com/danielscherzer/WpfOpenGlControl.sample.git).")]
+[assembly: AssemblyDescription("A WPF UserControl that hosts a OpenTK control. Multiple WpfOpenGlControls can share a single rendering context to allow sharing of textures, shaders...An example WPF application is available at (https://github.com/danielscherzer/WpfOpenGL).")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Daniel Scherzer")]
 [assembly: AssemblyProduct("WpfOpenGlControl")]

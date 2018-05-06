@@ -24,12 +24,15 @@
 			// create and wrap WINFORM control
 			if (!DesignerProperties.GetIsInDesignMode(this))
 			{
+				//TODO: performance with an INTEL integrated 620 on 4k is not good (see example on full screen)
 				glControl = new GLControl();
 				glControl.HandleCreated += GlControl_HandleCreated;
 				host.Child = glControl;
 				WindowsFormsHost.EnableWindowsFormsInterop();
 				glControl.Paint += GlControl_Paint;
 				glControl.Resize += GlControl_Invalidate;
+				glControl.CreateControl(); //force creation of control, so dependent constructors have valid OpenGL
+				glControl.VSync = true;
 			}
 		}
 
@@ -105,7 +108,7 @@
 		private void GlControl_HandleCreated(object sender, EventArgs e)
 		{
 			if (glControl is null) return;
-			if (singleContext is null) //first GLCONTROL sets rendering context
+			if (singleContext is null) //first GLCONTROL sets single rendering context
 			{
 				singleContext = glControl.Context;
 			}
@@ -118,6 +121,7 @@
 			GL.Viewport(0, 0, glControl.Width, glControl.Height);
 			GlRender?.Invoke(this, e);
 			glControl.SwapBuffers();
+			if(IsRenderLoopActivated) glControl.Invalidate(); //force redraw
 		}
 
 		private void GlControl_Invalidate(object sender, EventArgs e)
@@ -132,11 +136,12 @@
 			if (!control.ValidOpenGLContext) return;
 			if ((bool)e.NewValue)
 			{
-				CompositionTarget.Rendering += control.GlControl_Invalidate; // render every frame
+				control.Invalidate();
+				//CompositionTarget.Rendering += control.GlControl_Invalidate; // render every frame, but often creates jerky movement
 			}
 			else
 			{
-				CompositionTarget.Rendering -= control.GlControl_Invalidate;
+				//CompositionTarget.Rendering -= control.GlControl_Invalidate;
 			}
 		}
 	}

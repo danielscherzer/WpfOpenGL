@@ -1,0 +1,28 @@
+﻿<Window x:Class="Example.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:WpfOpenGL="clr-namespace:WpfOpenGlControl;assembly=WpfOpenGlControl" 
+        Title="MainWindow" Height="350" Width="525" SnapsToDevicePixels="True">
+	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*" />
+			<ColumnDefinition Width="5" />
+			<ColumnDefinition Width="*" />
+		</Grid.ColumnDefinitions>
+		<Grid Grid.Column="0">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="*" />
+				<RowDefinition Height="*" />
+			</Grid.RowDefinitions>
+			<WpfOpenGL:WpfOpenGLControl Grid.Row="0" GlRender="GlRenderRed" Name="gl1" HasSharedContext="True"
+				IsRenderLoopActivated="{Binding Path=IsChecked, ElementName=checkBox1, Mode=TwoWay}"/>
+			<WpfOpenGL:WpfOpenGLControl Grid.Row="1" GlRender="GlRenderGreen" HasSharedContext="True"
+				IsRenderLoopActivated="{Binding Path=IsChecked, ElementName=checkBox2, Mode=TwoWay}"/>
+		</Grid>
+		<GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch" />
+		<StackPanel Grid.Column="2" >
+			<CheckBox x:Name="checkBox1" IsChecked="True">activate render loop 0</CheckBox>
+			<CheckBox x:Name="checkBox2" IsChecked="False">activate render loop 1</CheckBox>
+		</StackPanel>
+	</Grid>
+</Window>
