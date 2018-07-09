@@ -8,7 +8,6 @@
 	using System.Windows;
 	using System.Windows.Controls;
 	using System.Windows.Forms.Integration;
-	using System.Windows.Media;
 
 	/// <summary>
 	/// A WPF GL control. The render context is by default shared between the instances. It uses a OpenTk.GLControl internally
