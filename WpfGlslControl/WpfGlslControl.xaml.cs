@@ -149,12 +149,12 @@ namespace WpfGlslControl
 			{
 				if (!ReferenceEquals(defaultShader, shader)) shader.Dispose();
 				var sVertexShader = contentManager.Load<string>("ScreenQuad.vert");
-				shader = ShaderLoader.FromStrings(sVertexShader, ShaderSourceCode);
+				shader = ShaderLoader.CreateFromStrings(sVertexShader, ShaderSourceCode);
 				ShaderLog = string.Empty;
 			}
 			catch (ShaderException e)
 			{
-				ShaderLog = e.ShaderLog;
+				ShaderLog = e.Message;
 				shader = defaultShader;
 			}
 			uniformSetters.Clear(); //uniform locations may have changed, so old setters are invalid
@@ -176,7 +176,7 @@ namespace WpfGlslControl
 			{
 				var sVertexShader = contentManager.Load<string>("ScreenQuad.vert");
 				var sFragmentShader = contentManager.Load<string>("checker");
-				defaultShader = ShaderLoader.FromStrings(sVertexShader, sFragmentShader);
+				defaultShader = ShaderLoader.CreateFromStrings(sVertexShader, sFragmentShader);
 			}
 			if (shader is null)
 			{
