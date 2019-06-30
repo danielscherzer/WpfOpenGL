@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{89DB2B76-463B-425F-A676-92DDBE74F19D}</ProjectGuid>
+    <ProjectGuid>{4285D3FB-5906-44D8-BD0F-1C124EC0C999}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>Example</RootNamespace>
     <AssemblyName>WpfGlsl.Sample</AssemblyName>
@@ -49,6 +49,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ShaderModel.cs" />
+    <Compile Include="ShaderParser.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -70,6 +72,11 @@
       <Project>{50ED089B-AB09-4BF9-87BD-2934B76E5057}</Project>
       <Name>WpfGlslControl</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="System.Reactive">
+      <Version>4.1.5</Version>
+    </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

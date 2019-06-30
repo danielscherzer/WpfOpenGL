@@ -8,6 +8,7 @@
 	using System.Windows;
 	using System.Windows.Controls;
 	using System.Windows.Forms.Integration;
+	using System.Windows.Media;
 
 	/// <summary>
 	/// A WPF GL control. The render context is by default shared between the instances. It uses a OpenTk.GLControl internally
@@ -71,6 +72,9 @@
 			set { SetValue(HasSharedContextProperty, value); }
 		}
 
+		public float ResolutionX => glControl.Width;
+		public float ResolutionY => glControl.Height;
+
 		/// <summary>
 		/// The has a shared context property
 		/// </summary>
@@ -120,7 +124,6 @@
 			GL.Viewport(0, 0, glControl.Width, glControl.Height);
 			GlRender?.Invoke(this, e);
 			glControl.SwapBuffers();
-			if(IsRenderLoopActivated) glControl.Invalidate(); //force redraw
 		}
 
 		private void GlControl_Invalidate(object sender, EventArgs e)
@@ -136,11 +139,11 @@
 			if ((bool)e.NewValue)
 			{
 				control.Invalidate();
-				//CompositionTarget.Rendering += control.GlControl_Invalidate; // render every frame, but often creates jerky movement
+				CompositionTarget.Rendering += control.GlControl_Invalidate; // render every frame, but often creates jerky movement
 			}
 			else
 			{
-				//CompositionTarget.Rendering -= control.GlControl_Invalidate;
+				CompositionTarget.Rendering -= control.GlControl_Invalidate;
 			}
 		}
 	}

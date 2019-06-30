@@ -1,7 +1,7 @@
-﻿using OpenTK.Graphics.OpenGL;
+﻿using OpenTK;
+using OpenTK.Graphics.OpenGL;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
@@ -15,6 +15,9 @@ namespace WpfGlslControl
 	/// </summary>
 	public partial class WpfShaderControl : UserControl
 	{
+		public float ResolutionX => glControl.ResolutionX;
+		public float ResolutionY => glControl.ResolutionY;
+
 		/// <summary>
 		/// Gets the shader log string.
 		/// </summary>
@@ -115,7 +118,7 @@ namespace WpfGlslControl
 			//TODO: could be a problem if not called from a dispatch timer -> on source code change parse shader uniforms and get locations
 			var location = shader.GetResourceLocation(ShaderResourceType.Uniform, name);
 			uniformSetters.Add(() => action(location));
-			glcontrol.Invalidate();
+			glControl.Invalidate();
 			return -1 != location;
 		}
 
@@ -127,7 +130,7 @@ namespace WpfGlslControl
 
 		private void WpfOpenGLControl_GlRender(object sender, EventArgs e)
 		{
-			if (!glcontrol.ValidOpenGLContext) return;
+			if (!glControl.ValidOpenGLContext) return;
 			CheckShaderReload();
 			shader.Activate();
 			//set all changed uniforms
@@ -166,12 +169,12 @@ namespace WpfGlslControl
 			var control = source as WpfShaderControl;
 			if (control is null) return;
 			control.needShaderReload = true;
-			control.glcontrol.Invalidate();
+			control.glControl.Invalidate();
 		}
 
 		private void UserControl_Loaded(object sender, RoutedEventArgs e)
 		{
-			if (!glcontrol.ValidOpenGLContext) return;
+			if (!glControl.ValidOpenGLContext) return;
 			if (defaultShader is null)
 			{
 				var sVertexShader = contentManager.Load<string>("ScreenQuad.vert");
