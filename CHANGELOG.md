@@ -7,4 +7,4 @@
 - [x] If shader code compilation/linking results in errors a default shader is shown
 - [x] Shader log is available via dependency property
 
-Features that have a check mark are complete and available for download with VisualStudio NuGet package manager from [WpfOpenGlControl@NuGet.org](https://www.nuget.org/packages/WpfOpenGlControl/) or [WpfGlslControl@NuGet.org](https://www.nuget.org/packages/WpfGlslControl/).
+Features that have a check mark are complete and available for download with VisualStudio NuGet package manager from [WpfOpenGlControl@NuGet.org](https://www.nuget.org/packages/WpfOpenGlControl/).
