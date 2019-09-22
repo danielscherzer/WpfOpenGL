@@ -72,8 +72,15 @@
 			set { SetValue(HasSharedContextProperty, value); }
 		}
 
-		public float ResolutionX => glControl.Width;
-		public float ResolutionY => glControl.Height;
+		/// <summary>
+		/// Resolution of the view port in x-direction
+		/// </summary>
+		public float ViewportResolutionX => glControl.Width;
+
+		/// <summary>
+		/// Resolution of the view port in y-direction
+		/// </summary>
+		public float ViewportResolutionY => glControl.Height;
 
 		/// <summary>
 		/// The has a shared context property

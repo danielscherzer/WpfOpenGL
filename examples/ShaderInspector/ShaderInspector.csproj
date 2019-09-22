@@ -51,7 +51,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ShaderModel.cs" />
-    <Compile Include="ShaderParser.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -69,15 +68,18 @@
     <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\WpfGlslControl\WpfGlslControl.csproj">
-      <Project>{50ED089B-AB09-4BF9-87BD-2934B76E5057}</Project>
-      <Name>WpfGlslControl</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
+    <PackageReference Include="GLSLhelper">
+      <Version>0.1.5</Version>
+    </PackageReference>
     <PackageReference Include="System.Reactive">
       <Version>4.1.6</Version>
     </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\WpfOpenGlControl\WpfOpenGlControl.csproj">
+      <Project>{48b5d6a6-3f23-4668-a585-a9e33900c99d}</Project>
+      <Name>WpfOpenGlControl</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

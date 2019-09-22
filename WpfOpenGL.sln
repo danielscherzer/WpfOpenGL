@@ -5,8 +5,6 @@ VisualStudioVersion = 15.0.27130.2024
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfOpenGlControl", "WpfOpenGlControl\WpfOpenGlControl.csproj", "{48B5D6A6-3F23-4668-A585-A9E33900C99D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfGlslControl", "WpfGlslControl\WpfGlslControl.csproj", "{50ED089B-AB09-4BF9-87BD-2934B76E5057}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "examples", "examples", "{ACF5AA5C-469D-4FB0-B895-F44088E88476}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfOpenGLControl.Sample", "examples\WpfOpenGlControl\WpfOpenGLControl.Sample.csproj", "{C16626EB-50B2-440E-B8D0-39A071DBCA40}"
@@ -39,10 +37,6 @@ Global
 		{48B5D6A6-3F23-4668-A585-A9E33900C99D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{48B5D6A6-3F23-4668-A585-A9E33900C99D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{48B5D6A6-3F23-4668-A585-A9E33900C99D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{50ED089B-AB09-4BF9-87BD-2934B76E5057}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{50ED089B-AB09-4BF9-87BD-2934B76E5057}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{50ED089B-AB09-4BF9-87BD-2934B76E5057}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{50ED089B-AB09-4BF9-87BD-2934B76E5057}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C16626EB-50B2-440E-B8D0-39A071DBCA40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C16626EB-50B2-440E-B8D0-39A071DBCA40}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C16626EB-50B2-440E-B8D0-39A071DBCA40}.Release|Any CPU.ActiveCfg = Release|Any CPU

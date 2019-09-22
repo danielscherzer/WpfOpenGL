@@ -1,10 +1,11 @@
-﻿using System;
+﻿using GLSLhelper;
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reactive.Linq;
 using System.Windows.Threading;
-using WpfGlslControl;
+using WpfOpenGlControl;
 
 namespace Example
 {
@@ -56,11 +57,11 @@ namespace Example
 			};
 			shaderControl.ShaderSourceCode = shaderSource;
 
-			var uniforms = ShaderParser.ParseUniforms(ShaderParser.RemoveComments(shaderSource));
-			var timeUniform = uniforms.Where((uniform) => uniform.name.IndexOf("time", StringComparison.OrdinalIgnoreCase) >= 0).FirstOrDefault();
-			if (!string.IsNullOrEmpty(timeUniform.name))
+			var uniforms = Parser.ParseUniforms(Transformations.RemoveComments(shaderSource));
+			var (type, name) = uniforms.Where((uniform) => uniform.name.IndexOf("time", StringComparison.OrdinalIgnoreCase) >= 0).FirstOrDefault();
+			if (!string.IsNullOrEmpty(name))
 			{
-				timer.Tick += (s, e) => shaderControl.SetUniform(timeUniform.name, (float)time.Elapsed.TotalSeconds);
+				timer.Tick += (s, e) => shaderControl.SetUniform(name, (float)time.Elapsed.TotalSeconds);
 				timer.Start();
 				time.Restart();
 			}

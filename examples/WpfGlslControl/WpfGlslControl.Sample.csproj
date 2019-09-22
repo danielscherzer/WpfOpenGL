@@ -66,9 +66,9 @@
     <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\WpfGlslControl\WpfGlslControl.csproj">
-      <Project>{50ED089B-AB09-4BF9-87BD-2934B76E5057}</Project>
-      <Name>WpfGlslControl</Name>
+    <ProjectReference Include="..\..\WpfOpenGlControl\WpfOpenGlControl.csproj">
+      <Project>{48b5d6a6-3f23-4668-a585-a9e33900c99d}</Project>
+      <Name>WpfOpenGlControl</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
