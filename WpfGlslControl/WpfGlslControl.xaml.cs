@@ -1,8 +1,6 @@
-﻿using OpenTK;
-using OpenTK.Graphics.OpenGL;
+﻿using OpenTK.Graphics.OpenGL;
 using System;
 using System.Collections.Generic;
-using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 using Zenseless.HLGL;
@@ -15,8 +13,15 @@ namespace WpfGlslControl
 	/// </summary>
 	public partial class WpfShaderControl : UserControl
 	{
-		public float ResolutionX => glControl.ResolutionX;
-		public float ResolutionY => glControl.ResolutionY;
+		/// <summary>
+		/// Resolution of the view port in x-direction
+		/// </summary>
+		public float ViewportResolutionX => glControl.ResolutionX;
+
+		/// <summary>
+		/// Resolution of the view port in y-direction
+		/// </summary>
+		public float ViewportResolutionY => glControl.ResolutionY;
 
 		/// <summary>
 		/// Gets the shader log string.
@@ -63,7 +68,6 @@ namespace WpfGlslControl
 		public WpfShaderControl()
 		{
 			InitializeComponent();
-			contentManager = ContentManagerGL.Create(Assembly.GetExecutingAssembly(), false);
 		}
 
 		/// <summary>
@@ -117,16 +121,15 @@ namespace WpfGlslControl
 		{
 			//TODO: could be a problem if not called from a dispatch timer -> on source code change parse shader uniforms and get locations
 			var location = shader.GetResourceLocation(ShaderResourceType.Uniform, name);
-			uniformSetters.Add(() => action(location));
+			uniformSetters[name] = () => action(location);
 			glControl.Invalidate();
 			return -1 != location;
 		}
 
-		private readonly FileContentManager contentManager;
 		private static IShaderProgram defaultShader;
 		private IShaderProgram shader;
 		private bool needShaderReload;
-		private List<Action> uniformSetters = new List<Action>();
+		private Dictionary<string, Action> uniformSetters = new Dictionary<string, Action>();
 
 		private void WpfOpenGLControl_GlRender(object sender, EventArgs e)
 		{
@@ -134,7 +137,7 @@ namespace WpfGlslControl
 			CheckShaderReload();
 			shader.Activate();
 			//set all changed uniforms
-			foreach (var setter in uniformSetters)
+			foreach (var setter in uniformSetters.Values)
 			{
 				setter.Invoke();
 			}
@@ -151,8 +154,7 @@ namespace WpfGlslControl
 			try
 			{
 				if (!ReferenceEquals(defaultShader, shader)) shader.Dispose();
-				var sVertexShader = contentManager.Load<string>("ScreenQuad.vert");
-				shader = ShaderLoader.CreateFromStrings(sVertexShader, ShaderSourceCode);
+				shader = ShaderLoader.CreateFromStrings(DefaultShaderSourceCode.Quad, ShaderSourceCode);
 				ShaderLog = string.Empty;
 			}
 			catch (ShaderException e)
@@ -177,9 +179,7 @@ namespace WpfGlslControl
 			if (!glControl.ValidOpenGLContext) return;
 			if (defaultShader is null)
 			{
-				var sVertexShader = contentManager.Load<string>("ScreenQuad.vert");
-				var sFragmentShader = contentManager.Load<string>("checker");
-				defaultShader = ShaderLoader.CreateFromStrings(sVertexShader, sFragmentShader);
+				defaultShader = ShaderLoader.CreateFromStrings(DefaultShaderSourceCode.Quad, DefaultShaderSourceCode.Checker);
 			}
 			if (shader is null)
 			{

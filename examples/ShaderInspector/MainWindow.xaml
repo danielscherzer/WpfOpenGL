@@ -2,12 +2,13 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 		xmlns:WpfOpenGL="clr-namespace:WpfGlslControl;assembly=WpfGlslControl" 
-        Title="MainWindow" Height="500" Width="700" SnapsToDevicePixels="True" AllowDrop="True" PreviewDragOver="ShaderControl_PreviewDragOver" Drop="ShaderControl_Drop">
+        Title="MainWindow" Height="500" Width="700" SnapsToDevicePixels="True"
+		AllowDrop="True" PreviewDragOver="ShaderControl_PreviewDragOver" Drop="ShaderControl_Drop" ResizeMode="CanResizeWithGrip">
 	<DockPanel>
 		<StatusBar DockPanel.Dock="Bottom">
-			<TextBlock Text="{Binding Path=ActualWidth, ElementName=shaderControl, StringFormat={}{0:#}}"/>
+			<TextBlock Text="{Binding Path=ResolutionX, ElementName=shaderControl, StringFormat={}{0:#}}"/>
 			<TextBlock Text="x"/>
-			<TextBlock Text="{Binding Path=ActualHeight, ElementName=shaderControl, StringFormat={}{0:#}}"/>
+			<TextBlock Text="{Binding Path=ResolutionY, ElementName=shaderControl, StringFormat={}{0:#}}"/>
 			<TextBlock Text=" pixel"/>
 			<TextBox TextWrapping="Wrap" MinWidth="200" Text="{Binding Path=ShaderLog, ElementName=shaderControl, Mode=OneWay}"/>
 		</StatusBar>

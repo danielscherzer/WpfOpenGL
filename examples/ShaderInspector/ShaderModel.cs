@@ -11,7 +11,7 @@ namespace Example
 	class ShaderModel
 	{
 		private WpfShaderControl shaderControl;
-		private IDisposable subscription;
+		private IDisposable fileChangeSubscription;
 		private DispatcherTimer timer = new DispatcherTimer();
 		private Stopwatch time = new Stopwatch();
 
@@ -20,7 +20,7 @@ namespace Example
 			this.shaderControl = shaderControl;
 		}
 
-		private IObservable<string> CreateFileChangeSequence(string fileName)
+		private static IObservable<string> CreateFileChangeSequence(string fileName)
 		{
 			var fullPath = Path.GetFullPath(fileName);
 			return Observable.Return(fileName).Concat(
@@ -42,10 +42,10 @@ namespace Example
 
 		internal void LoadShaderFile(string fileName)
 		{
-			subscription?.Dispose();
+			fileChangeSubscription?.Dispose();
 			var seqFileChanged = CreateFileChangeSequence(fileName);
-			subscription = seqFileChanged.Delay(TimeSpan.FromSeconds(0.1f)).Select((newFileName) => File.ReadAllText(newFileName))
-				.Retry(3).ObserveOnDispatcher().Subscribe((shaderSource) => LoadShader(shaderSource));
+			fileChangeSubscription = seqFileChanged.Delay(TimeSpan.FromSeconds(0.1f)).Select((newFileName) => File.ReadAllText(newFileName))
+				.ObserveOnDispatcher().Subscribe((shaderSource) => LoadShader(shaderSource));
 		}
 
 		internal void LoadShader(string shaderSource)
@@ -67,7 +67,7 @@ namespace Example
 			var resolutionUniform = uniforms.Where((uniform) => uniform.name.IndexOf("resolution", StringComparison.OrdinalIgnoreCase) >= 0).FirstOrDefault();
 			if (!string.IsNullOrEmpty(resolutionUniform.name))
 			{
-				timer.Tick += (s, e) => shaderControl.SetUniform(resolutionUniform.name, shaderControl.ResolutionX, shaderControl.ResolutionY);
+				timer.Tick += (s, e) => shaderControl.SetUniform(resolutionUniform.name, shaderControl.ViewportResolutionX, shaderControl.ViewportResolutionY);
 			}
 		}
 	}
